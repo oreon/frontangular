@@ -1,0 +1,42 @@
+<section class="mainbar" data-ng-init="vm.toEditDepartment()">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      Department Edit
+    </div>
+    <div class="panel-body">
+
+      <form data-ng-submit="vm.update()"  name="depForm" novalidate>
+        <div>
+         <label for="lastName">Name OF DEP</label>  
+         <input id="name" name="name" type="text" class="form-control" ng-model="vm.department.name"  ng-maxlength="50" ng-required="true"/>  
+          <pre>depForm.name.$error = {{depForm.name.$error | json }}</pre>
+          
+          <div class="help-block" ng-messages="depForm.name.$error" ng-if="depForm.name.$touched">
+            <p ng-message="minlength">Your name is too short.</p>
+            <p ng-message="maxlength">Your name is too long.</p>
+            <p ng-message="required">Your name is required.</p>
+           </div>
+       </div>
+        
+        <hr/>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success" ng-disabled="depForm.$invalid">
+              <i class="glyphicon glyphicon-ok"></i> Save
+            </button>
+            <a class="btn btn-danger" href="/department">
+              <i class="glyphicon glyphicon-remove"></i> Cancel
+            </a>
+        </div>
+
+        <div data-ng-show="vm.error" class="alert alert-danger form-group">
+          <strong data-ng-bind="vm.error"></strong>
+        </div>
+
+      </form>
+
+
+    </div>
+  </div>
+
+</section>

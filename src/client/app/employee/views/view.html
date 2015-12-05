@@ -1,0 +1,48 @@
+<section class="mainbar" data-ng-init="vm.toViewEmployee()">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+			Employee View
+    </div>
+    <div class="panel-body">
+
+      <form novalidate>
+         <panel> 
+              
+          <div> 
+            <label for="gender">Gender</label> {{vm.employee.gender}}
+          </div>  
+          <div> 
+            <label for="dob">Dob</label> {{vm.employee.dob}}
+          </div>  
+          <div> 
+            <label for="departmentId">Department</label>  
+            <a class="btn btn-default" title="View" href="/department/{{vm.employee.department.id}}">{{vm.employee.department.displayName}}</a> 
+          </div>  
+          <div> 
+            <label for="firstName">First Name</label> {{vm.employee.firstName}}
+          </div>  
+          <div> 
+            <label for="lastName">Last Name</label> {{vm.employee.lastName}}
+          </div> 
+      </panel>
+       
+      </form>
+
+      <hr/>
+      <div>
+        <a class="btn btn-success" href="/employee/{{vm.employee.id}}/edit">
+          <i class="glyphicon glyphicon-edit"></i> Edit
+        </a>
+        <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove()" item="vm.employee">
+          <i class="glyphicon glyphicon-remove-circle"></i> Delete
+        </a>
+        <a class="btn btn-primary" href="/employee">
+          <i class="glyphicon glyphicon-list"></i> List Employees
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+</section>

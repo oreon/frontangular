@@ -1,0 +1,49 @@
+<section class="mainbar"  data-ng-init="vm.getEmployees()">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      Employee List
+    </div>
+    <div class="panel-body">
+
+      <div class="pull-right">
+        <a type="button" class="btn btn-success" href="/employee//edit">
+          <i class="glyphicon glyphicon-open"></i> New Employee
+        </a>
+      </div>
+      <h2> HI  </h2>
+
+      <table ng-table="vm.tableParams" show-filter="true" class="table table-condensed table-striped">
+          <tr ng-repeat="employee in vm.employees">
+               <td data-title="'Gender'" sortable="'gender'" filter="{ 'gender': 'text' }">{{employee.gender}}</td>  
+              <td data-title="'Dob'" sortable="'dob'" filter="{ 'dob': 'text' }">{{employee.dob}}</td>  
+              <td data-title="'Address'" sortable="'address'" filter="{ 'address': 'text' }"> 
+                <a class="btn btn-default" title="View" href="/address/{{employee.address.id}}">{{employee.address.displayName}}</a> 
+              </td>  
+              <td data-title="'Department'" sortable="'department'" filter="{ 'department': 'text' }"> 
+                <a class="btn btn-default" title="View" href="/department/{{employee.department.id}}">{{employee.department.displayName}}</a> 
+              </td>  
+              <td data-title="'First Name'" sortable="'firstName'" filter="{ 'firstName': 'text' }">{{employee.firstName}}</td>  
+              <td data-title="'Last Name'" sortable="'lastName'" filter="{ 'lastName': 'text' }">{{employee.lastName}}</td>  
+              
+        
+              <td>
+                 <div class="table-actions">
+                      <a class="btn btn-default" title="View" href="/employee/{{employee.id}}">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                      </a>
+                      <a class="btn btn-default" title="Edit" href="/employee/{{employee.id}}/edit">
+                        <span class="glyphicon glyphicon-edit"></span>
+                      </a>
+                      <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove(employee)" item="employee">
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                      </a>
+                  </div>
+              </td>
+          </tr>
+      </table>
+
+    </div>
+  </div>
+
+</section>

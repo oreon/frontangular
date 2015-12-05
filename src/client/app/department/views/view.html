@@ -1,0 +1,52 @@
+<section class="mainbar" data-ng-init="vm.toViewDepartment()">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+			Department - {{vm.department.displayName}}
+    </div>
+    <div class="panel-body">
+
+      <form novalidate>
+        Name {{vm.department.name}}
+        
+       <table ng-table="vm.tableParams" show-filter="true" class="table table-condensed table-striped">
+          <tr ng-repeat="employee in vm.department.employees">
+              <td data-title="'Name'" sortable="'firstName'" filter="{ 'firstName': 'text' }">{{employee.firstName}}</td>
+              <td data-title="'Address'" sortable="'lastName'" filter="{'lastName': 'text'}">{{employee.lastName}}</td>
+              
+              
+               <td>
+                 <div class="table-actions">
+                      <a class="btn btn-default" title="View" href="/employee/{{employee.id}}">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                      </a>
+                      <a class="btn btn-default" title="Edit" href="/employee/{{employee.id}}/edit">
+                        <span class="glyphicon glyphicon-edit"></span>
+                      </a>
+                      <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove(employee)" item="employee">
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                      </a>
+                  </div>
+              </td>
+          </tr>
+      </table> 
+        
+      </form>
+
+      <hr/>
+      <div>
+        <a class="btn btn-success" href="/department/{{vm.department.id}}/edit">
+          <i class="glyphicon glyphicon-edit"></i> Edit
+        </a>
+        <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove()" item="vm.department">
+          <i class="glyphicon glyphicon-remove-circle"></i> Delete
+        </a>
+        <a class="btn btn-primary" href="/department">
+          <i class="glyphicon glyphicon-list"></i> List Departments
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+</section>

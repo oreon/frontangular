@@ -1,0 +1,62 @@
+<section class="mainbar" data-ng-init="vm.toEditEmployee()"> 
+  <div class="panel panel-primary"> 
+    <div class="panel-heading">Edit EMP</div>  
+    <div class="panel-body"> 
+      <form data-ng-submit="vm.update()" name="EmployeeForm" novalidate> 
+        <select class="form-control" name="gender" ng-model="vm.employee.gender" ng-required="false"> 
+          <option value="">--Select--</option>  
+          <option value="MALE" ng-selected="{{'M' == vm.employee.gender}}">MALE</option>  
+          <option value="FEMALE" ng-selected="{{'F' == vm.employee.gender}}">FEMALE</option> 
+        </select>  
+        <div class="form-group"> 
+          <label for="dob">Dob</label>  
+          <input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="vm.employee.dob" ng-required="true" close-text="Close"/>  
+          <div class="alert alert-danger form-group" ng-messages="dobForm.name.$error" ng-if="dobForm.name.$touched"> 
+            <p ng-message="minlength">Input is too short.</p>  
+            <p ng-message="maxlength">Input is too long.</p>  
+            <p ng-message="required">Input is required.</p> 
+          </div> 
+        </div>  
+        <div class="form-group"> 
+          <label for="departmentId">Department</label>  
+          <select class="form-control" name="departmentId" ng-model="vm.employee.department" ng-options="option.id as option.displayName for option in vm.departments" ng-required="true"></select>  
+          <div class="alert alert-danger form-group" ng-messages="departmentForm.name.$error" ng-if="departmentForm.name.$touched"> 
+            <p ng-message="minlength">Input is too short.</p>  
+            <p ng-message="maxlength">Input is too long.</p>  
+            <p ng-message="required">Input is required.</p> 
+          </div> 
+        </div>  
+        <div class="form-group"> 
+          <label for="firstName">First Name</label>  
+          <input id="firstName" name="firstName" type="text" class="form-control" maxlength="50" ng-model="vm.employee.firstName" ng-minlength="2" ng-maxlength="50"/>  
+          <div class="alert alert-danger form-group" ng-messages="EmployeeForm.name.$error" ng-if="firstNameForm.name.$touched"> 
+            <p ng-message="minlength">Input is too short.</p>  
+            <p ng-message="maxlength">Input is too long.</p>  
+            <p ng-message="required">Input is required.</p> 
+          </div> 
+        </div>  
+        <div class="form-group"> 
+          <label for="lastName">Last Name</label>  
+          <input id="lastName" name="lastName" type="text" class="form-control" maxlength="50" ng-model="vm.employee.lastName" ng-minlength="2" ng-maxlength="50"/>  
+          <div class="alert alert-danger form-group" ng-messages="lastNameForm.name.$error" ng-if="lastNameForm.name.$touched"> 
+            <p ng-message="minlength">Input is too short.</p>  
+            <p ng-message="maxlength">Input is too long.</p>  
+            <p ng-message="required">Input is required.</p> 
+          </div> 
+        </div>  
+        <hr/>  
+        <div class="form-group"> 
+          <button type="submit" class="btn btn-success" ng-disabled="EmployeeForm.$invalid"> 
+            <i class="glyphicon glyphicon-ok"/> Save
+          </button>  
+          <a class="btn btn-danger" href="/employee"> 
+            <i class="glyphicon glyphicon-remove"/> Cancel
+          </a> 
+        </div>  
+        <div data-ng-show="vm.error" class="alert alert-danger form-group"> 
+          <strong data-ng-bind="vm.error"/> 
+        </div> 
+      </form> 
+    </div> 
+  </div> 
+</section>
