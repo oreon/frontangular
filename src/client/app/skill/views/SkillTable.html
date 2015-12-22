@@ -1,0 +1,36 @@
+
+
+<div class="pull-right">
+    <a type="button" class="btn btn-success" href="/skill//edit">
+      <i class="glyphicon glyphicon-open"></i> New Skill
+    </a>
+ </div>
+
+<table ng-table="tableParams" show-filter="true" class="table table-condensed table-striped">
+      <tr ng-repeat="skill in skills">
+         
+   <td data-title="'Name'" sortable="'name'" filter="{ 'name': 'text' }">
+	
+	
+			{{skill.name}}	
+		
+
+   </td>
+          
+    
+          <td>
+              <div class="table-actions">
+                  <a class="btn btn-default" title="View" href="/skill/{{skill.id}}">
+                    <span class="glyphicon glyphicon-eye-open"></span>
+                  </a>
+                  <a class="btn btn-default" title="Edit" href="/skill/{{skill.id}}/edit">
+                    <span class="glyphicon glyphicon-edit"></span>
+                  </a>
+                  <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure you want to remove {{skill.displayName}} ?" ng-really-click="vm.remove(skill)" item="skill">
+                    <span class="glyphicon glyphicon-remove-circle"></span>
+                  </a>
+              </div>
+          </td>
+      </tr>
+ </table>
+

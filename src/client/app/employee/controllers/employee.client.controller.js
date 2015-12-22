@@ -26,6 +26,7 @@
         vm.employees = [];
         vm.tableParams =   new ngTableParams( );//TableSettings.getParams( Employee);
         vm.employee = {};
+        vm.skills  = [];
         
           vm.checkModel = {
             left: false,
@@ -40,7 +41,8 @@
             if(!$stateParams.id){
                 vm.tableParams.settings({dataset: vm.employees});
                 getEmployees();
-            };
+            }
+            
         }
         
         vm.toEditEmployee = function(){
@@ -48,6 +50,7 @@
                  vm.employee = data
                  
                  getDepartments();
+                 getSkills();
                  
             });
         }
@@ -76,8 +79,34 @@
                     vm.departments = data;
                 });
         }
-	  
         
+        
+        
+       
+		function getSkills() {
+            return Api.getSkills()
+                .then(function(data) {
+                    vm.skills = data;
+                });
+        }
+        
+        
+	  
+        vm.addEmployeeSkill = function() {
+            var item = {};
+            
+            if(!vm.employee.employeeSkills){
+                vm.employee.employeeSkills =[];
+            }
+            vm.employee.employeeSkills.push(item);
+            
+           
+        }
+
+        vm.removeEmployeeSkill = function(index) {
+            vm.employee.employeeSkills.splice(index, 1);
+        }
+     
        
         vm.create = function() {
             if(!vm.employee.id )

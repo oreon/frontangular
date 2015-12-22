@@ -2,13 +2,13 @@
 
   <div class="panel panel-primary">
     <div class="panel-heading">
-      New Employee
+      New Skill
     </div>
     <div class="panel-body">
 
       <form data-ng-submit="vm.create()" novalidate>
 
-        <formly-form model="vm.employee" fields="vm.formFields" form="vm.form">
+        <formly-form model="vm.skill" fields="vm.formFields" form="vm.form">
         </formly-form>
 
         <hr/>
@@ -16,7 +16,7 @@
             <button type="submit" class="btn btn-success" ng-disabled="vm.form.$invalid">
               <i class="glyphicon glyphicon-ok"></i> Save
             </button>
-            <a class="btn btn-danger" href="/employee">
+            <a class="btn btn-danger" href="/skill">
               <i class="glyphicon glyphicon-remove"></i> Cancel
             </a>
         </div>

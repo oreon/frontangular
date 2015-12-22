@@ -15,7 +15,8 @@
     "angular-mocks": "~1.4.8",
     "sinon": "http://sinonjs.org/releases/sinon-1.12.1.js",
     "bardjs": "~0.0.3",
-    "angular-messages": "~1.4.8"
+    "angular-messages": "~1.4.8",
+    "ng-tasty": "~0.5.8"
   },
   "dependencies": {
     "jquery": "~2.1.0",

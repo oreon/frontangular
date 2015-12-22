@@ -1,30 +1,37 @@
-(function() {
-    'use strict';
-
-    angular
-        .module('app.employee')
-        .factory('Employee', Employee);
-
-    Employee.$inject = ['$resource', 'API_BASE_URL'];
-    /* @ngInject */
-    function Employee($resource, API_BASE_URL) {
-
-        var params = {
-            id: '@id'
-        };
-
-        var actions = {
-            update: {
-                method: 'PUT'
-            }
-        };
+var employeeService = angular.module('app.core').factory('employeeService', function ($resource, $cacheFactory, API_BASE_URL) {
+        var employeeCache = $cacheFactory('Employees');
         
-        API_BASE_URL = "http://localhost:8000/api/v1"
-
-        var API_URL = API_BASE_URL + '/employees22/:id';
-
-        return $resource(API_URL, params, actions);
-
-    }
-
-})();
+        baseUrl = API_BASE_URL;
+        
+        var res =   $resource(baseUrl + '/employees/:id', {id: '@id'}, {
+            query: {
+                method: 'GET',
+                isArray: false
+               // cache: employeeCache
+            },
+            'update': { method:'PUT' , url: baseUrl + '/employeesWritable/:id' },
+            'create': { method:'POST' , url: baseUrl + '/employeesWritable/:id'},
+            get: { method:'GET',
+             //cache: employeeCache
+            },
+             'getComplete':{
+                method:'GET',
+                url: baseUrl + '/employeesComplete/:id'
+            },
+            'getWritable': { 
+                method:'GET',
+                url: baseUrl + '/employeesWritable/:id'
+             //cache: employeeCache
+            },
+        } );           
+           
+        res.prototype.$save = function() {
+            if (this.id) {
+                return this.$update();
+            } else {
+                return this.$create();
+            }
+        }
+        
+        return res;
+    });

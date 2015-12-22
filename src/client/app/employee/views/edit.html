@@ -1,13 +1,21 @@
 <section class="mainbar" data-ng-init="vm.toEditEmployee()"> 
   <div class="panel panel-primary"> 
-    <div class="panel-heading">Edit EMP</div>  
+    <div class="panel-heading">Edit</div>  
     <div class="panel-body"> 
-      <form data-ng-submit="vm.update()" name="EmployeeForm" novalidate> 
-        <select class="form-control" name="gender" ng-model="vm.employee.gender" ng-required="false"> 
-          <option value="">--Select--</option>  
-          <option value="MALE" ng-selected="{{'M' == vm.employee.gender}}">MALE</option>  
-          <option value="FEMALE" ng-selected="{{'F' == vm.employee.gender}}">FEMALE</option> 
-        </select>  
+      <form data-ng-submit="vm.update()" name="EmployeeForm"> 
+        <div class="form-group"> 
+          <label for="gender">Gender</label>  
+          <select class="form-control" name="gender" ng-model="vm.employee.gender" ng-required="false"> 
+            <option value="">--Select--</option>  
+            <option value="MALE" ng-selected="{{'MALE' == vm.employee.gender}}">MALE</option>  
+            <option value="FEMALE" ng-selected="{{'FEMALE' == vm.employee.gender}}">FEMALE</option> 
+          </select>  
+          <div class="alert alert-danger form-group" ng-messages="genderForm.name.$error" ng-if="genderForm.name.$touched"> 
+            <p ng-message="minlength">Input is too short.</p>  
+            <p ng-message="maxlength">Input is too long.</p>  
+            <p ng-message="required">Input is required.</p> 
+          </div> 
+        </div>  
         <div class="form-group"> 
           <label for="dob">Dob</label>  
           <input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="vm.employee.dob" ng-required="true" close-text="Close"/>  
@@ -29,7 +37,7 @@
         <div class="form-group"> 
           <label for="firstName">First Name</label>  
           <input id="firstName" name="firstName" type="text" class="form-control" maxlength="50" ng-model="vm.employee.firstName" ng-minlength="2" ng-maxlength="50"/>  
-          <div class="alert alert-danger form-group" ng-messages="EmployeeForm.name.$error" ng-if="firstNameForm.name.$touched"> 
+          <div class="alert alert-danger form-group" ng-messages="firstNameForm.name.$error" ng-if="firstNameForm.name.$touched"> 
             <p ng-message="minlength">Input is too short.</p>  
             <p ng-message="maxlength">Input is too long.</p>  
             <p ng-message="required">Input is required.</p> 
@@ -45,6 +53,22 @@
           </div> 
         </div>  
         <hr/>  
+        
+        <button type="button"  class="btn btn-primary" ng-click="vm.addEmployeeSkill()">Add Skill</button>
+        
+        <div ng-repeat="employeeSkill in vm.employee.employeeSkills">
+
+          {{$index + 1}}
+          <select name="skillSelect" id="skillSelect" ng-model="employeeSkill.skill"  
+            ng-options="option.id as option.name for option in vm.skills" ng-required="true">
+          </select> 
+          {{employeeSkill.experience}}
+          <input type="text" ng-model="employeeSkill.experience" /> 
+    
+          <button  type="button" ng-click="vm.removeEmployeeSkill($index)">Remove</button>
+        </div>
+        
+        
         <div class="form-group"> 
           <button type="submit" class="btn btn-success" ng-disabled="EmployeeForm.$invalid"> 
             <i class="glyphicon glyphicon-ok"/> Save

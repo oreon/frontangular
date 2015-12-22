@@ -13,8 +13,10 @@
             'ngResource',
             'ui.bootstrap',
             'ngTable',
-             'ngMessages',
+            'ngMessages',
             'formly',
-            'formlyBootstrap'
+            /*'ngTasty',*/
+            'formlyBootstrap',
+            'angular-cache'
         ]);
 })();

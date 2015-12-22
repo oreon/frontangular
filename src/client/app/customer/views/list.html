@@ -14,17 +14,8 @@
 
       <table ng-table="vm.tableParams" show-filter="true" class="table table-condensed table-striped">
           <tr ng-repeat="customer in $data">
-              <td data-title="'Gender'" sortable="'gender'" filter="{ 'gender': 'text' }">{{vm.employee.gender}}</td>  
-              <td data-title="'Dob'" sortable="'dob'" filter="{ 'dob': 'text' }">{{vm.employee.dob}}</td>  
-              <td data-title="'Address'" sortable="'address'" filter="{ 'address': 'text' }"> 
-                <a class="btn btn-default" title="View" href="/address/{{vm.employee.address.id}}">{{vm.employee.address.displayName}}</a> 
-              </td>  
-              <td data-title="'Department'" sortable="'department'" filter="{ 'department': 'text' }"> 
-                <a class="btn btn-default" title="View" href="/department/{{vm.employee.department.id}}">{{vm.employee.department.displayName}}</a> 
-              </td>  
-              <td data-title="'First Name'" sortable="'firstName'" filter="{ 'firstName': 'text' }">{{vm.employee.firstName}}</td>  
-              <td data-title="'Last Name'" sortable="'lastName'" filter="{ 'lastName': 'text' }">{{vm.employee.lastName}}</td>  
-              <td> 
+              <td data-title="'Name'" sortable="'name'" filter="{ 'name': 'text' }">{{customer.name}}</td>
+              <td data-title="'Address'" sortable="'address'" filter="{'address': 'text'}">{{customer.address}}</td>
               <td>
                  <div class="table-actions">
                       <a class="btn btn-default" title="View" href="/customer/{{customer.id}}">

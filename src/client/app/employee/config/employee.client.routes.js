@@ -28,16 +28,6 @@
                 }
             },
             {
-                state: 'createEmployee',
-                config: {
-                    url: '/employee/create',
-                    templateUrl: 'app/employee/views/create.html',
-                    controller: 'EmployeeController',
-                    controllerAs: 'vm',
-                    title: 'Create Employee'
-                }
-            },
-            {
                 state: 'viewEmployee',
                 config: {
                     url: '/employee/:id',

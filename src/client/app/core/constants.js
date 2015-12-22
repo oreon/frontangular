@@ -6,5 +6,5 @@
         .module('app.core')
         .constant('toastr', toastr)
         .constant('moment', moment)
-        .constant('API_BASE_URL', 'http://localhost:1337');
+        .constant('API_BASE_URL', 'http://localhost:8000/api/v1');
 })();

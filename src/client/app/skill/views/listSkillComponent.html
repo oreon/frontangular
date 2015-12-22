@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<div ng-controller="SkillController">name 
+  <table> 
+    <thead> 
+      <th>Name</th> 
+    </thead>  
+    <tbody> 
+      <tr ng-repeat="record in vm.skillRecords"> 
+        <td data-title="'Name'" sortable="'name'" filter="{ 'name': 'text' }">{{vm.skill.name}}</td>  
+        <td> 
+          <a class="btn btn-primary">View</a>  
+          <a class="btn btn-primary" href="orders/{{customerOrder.id}}">Edit</a>  
+          <a class="btn btn-danger" ng-click="deleteMovie(customerOrder)">Delete</a> 
+        </td> 
+      </tr> 
+    </tbody> 
+  </table>  
+  <div> 
+    <pagination total-items="vm.itemCount" ng-model="vm.currentPage" max-size="vm.maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="vm.numPages"/>
+  </div> 
+</div>

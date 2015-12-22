@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section class="mainbar" data-ng-init="vm.toEditSkill()"> 
+  <div class="panel panel-primary"> 
+    <div class="panel-heading">Edit</div>  
+    <div class="panel-body"> 
+      <form data-ng-submit="vm.update()" name="SkillForm"> 
+        <div class="form-group"> 
+          <label for="name">Name</label>  
+          <input id="name" name="name" type="text" class="form-control" maxlength="50" ng-model="vm.skill.name" ng-minlength="2" ng-maxlength="50"/>  
+          <div class="alert alert-danger form-group" ng-messages="nameForm.name.$error" ng-if="nameForm.name.$touched"> 
+            <p ng-message="minlength">Input is too short.</p>  
+            <p ng-message="maxlength">Input is too long.</p>  
+            <p ng-message="required">Input is required.</p> 
+          </div> 
+        </div>  
+        <hr/>  
+        <div class="form-group"> 
+          <button type="submit" class="btn btn-success" ng-disabled="SkillForm.$invalid"> 
+            <i class="glyphicon glyphicon-ok"/> Save
+          </button>  
+          <a class="btn btn-danger" href="/skill"> 
+            <i class="glyphicon glyphicon-remove"/> Cancel
+          </a> 
+        </div>  
+        <div data-ng-show="vm.error" class="alert alert-danger form-group"> 
+          <strong data-ng-bind="vm.error"/> 
+        </div> 
+      </form> 
+    </div> 
+  </div> 
+</section>
