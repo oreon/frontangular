@@ -14,9 +14,7 @@
   "devDependencies": {
     "angular-mocks": "~1.4.8",
     "sinon": "http://sinonjs.org/releases/sinon-1.12.1.js",
-    "bardjs": "~0.0.3",
-    "angular-messages": "~1.4.8",
-    "ng-tasty": "~0.5.8"
+    "bardjs": "~0.0.3"
   },
   "dependencies": {
     "jquery": "~2.1.0",
@@ -36,6 +34,9 @@
     "angular-formly": "~4.0.11",
     "angular-formly-templates-bootstrap": "~4.0.3",
     "angular-cache": "~4.4.2",
-    "lodash": "~3.10.1"
+    "lodash": "~3.10.1",
+    "angular-messages": "~1.4.8",
+    "ng-tasty": "~0.5.8",
+    "ngstorage": "~0.3.10"
   }
 }

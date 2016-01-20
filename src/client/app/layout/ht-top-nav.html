@@ -20,11 +20,11 @@
                         <img src="images/AngularJS-small.png" />
                     </a>
                 </li>
-                <li>
-                    <a href="http://www.gulpjs.com/" target="_blank">
-                        <img src="images/gulp-tiny.png" />
-                    </a>
+
+                <li  ng-if = "vm.isAuthenticated()">
+                    <a ng-click="vm.logout()" href="">Logout {{vm.currentUser()}} </a>
                 </li>
+
             </ul>
         </div>
     </div>

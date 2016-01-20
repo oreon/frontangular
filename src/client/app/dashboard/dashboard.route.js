@@ -16,7 +16,7 @@
             {
                 state: 'dashboard',
                 config: {
-                    url: '/',
+                    url: '/dashboard',
                     templateUrl: 'app/dashboard/dashboard.html',
                     controller: 'DashboardController',
                     controllerAs: 'vm',
@@ -24,6 +24,20 @@
                     settings: {
                         nav: 1,
                         content: '<i class="fa fa-dashboard"></i> Dashboard'
+                    }
+                }
+            },
+            {
+                state: 'index',
+                config: {
+                    url: '/',
+                    templateUrl: 'app/login/login.html',
+                    controller: 'LoginController',
+                    controllerAs: 'vm',
+                    title: 'Login',
+                    settings: {
+                        nav: 1,
+                        content: '<i class="fa fa-dashboard"></i> LOG IN'
                     }
                 }
             }

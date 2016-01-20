@@ -17,6 +17,7 @@
             'formly',
             /*'ngTasty',*/
             'formlyBootstrap',
-            'angular-cache'
+            'angular-cache',
+            'ngStorage'
         ]);
 })();

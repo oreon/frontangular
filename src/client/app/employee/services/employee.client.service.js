@@ -9,18 +9,18 @@ var employeeService = angular.module('app.core').factory('employeeService', func
                 isArray: false
                // cache: employeeCache
             },
-            'update': { method:'PUT' , url: baseUrl + '/employeesWritable/:id' },
-            'create': { method:'POST' , url: baseUrl + '/employeesWritable/:id'},
+            'update': { method:'PUT' , url: baseUrl + '/employees/:id' },
+            'create': { method:'POST' , url: baseUrl + '/employees/:id'},
             get: { method:'GET',
              //cache: employeeCache
             },
              'getComplete':{
                 method:'GET',
-                url: baseUrl + '/employeesComplete/:id'
+                url: baseUrl + '/employees/:id/complete'
             },
             'getWritable': { 
                 method:'GET',
-                url: baseUrl + '/employeesWritable/:id'
+                url: baseUrl + '/employees/:id/writable'
              //cache: employeeCache
             },
         } );           
