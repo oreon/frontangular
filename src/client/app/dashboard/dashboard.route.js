@@ -30,7 +30,7 @@
             {
                 state: 'index',
                 config: {
-                    url: '/',
+                    url: '/logmein',
                     templateUrl: 'app/login/login.html',
                     controller: 'LoginController',
                     controllerAs: 'vm',
@@ -42,9 +42,9 @@
                 }
             },
             {
-                state: 'register',
+                state: 'registerme',
                 config: {
-                    url: '/register',
+                    url: '/registerme',
                     templateUrl: 'app/login/register.html',
                     controller: 'LoginController',
                     controllerAs: 'vm',
