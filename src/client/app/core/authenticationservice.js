@@ -115,20 +115,30 @@
 		 * @returns {Promise}
 		 * @memberOf thinkster.authentication.services.Authentication
 		 */
-		function register(email, password, username) {
-			return $http.post('/api/v1/accounts/', {
-				username : username,
+		function register(user) {
+			return $http.post('http://localhost:8000/rest-auth/registration/', {
+				username : user.username,
+				password1 : user.password1,
+				password2 : user.password2,
+				email : user.email
+			}) .success(function (data, status, headers, config) {
+					user.password = user.password1;
+					Authentication.login(user);
+					//console.log(Authentication.profile);
+				    //vm.welcome = 'Welcome ' + profile.firstName + ' ' + profile.lastName;
+			   })
+			   .error(function (data, status, headers, config) {
+				return (  data +  ' ' + status);
+			   });
 
-				password : password,
-				email : email
-			}).then(registerSuccessFn, registerErrorFn);
 
 			/**
 			 * @name registerSuccessFn
 			 * @desc Log the new user in
 			 */
-			function registerSuccessFn(data, status, headers, config) {
-				Authentication.login(email, password);
+			registerSuccessFn = function (data, status, headers, config) {
+			    //user.password = user.password1;
+				//Authentication.login(user);
 			}
 
 			/**
@@ -136,7 +146,7 @@
 			 * @desc Log "Epic failure!" to the console
 			 */
 			function registerErrorFn(data, status, headers, config) {
-				console.error('Epic failure!');
+				return (  data +  ' ' + status);
 			}
 		}
 

@@ -6,7 +6,7 @@
 
      LoginController.$inject = [
         '$state','logger','authenticationService'];
-  
+
 
     function LoginController($state, logger, authenticationService) {
         var vm = this;
@@ -24,16 +24,26 @@
 
         function activate() {
         }
-        
+
         function submit() {
             authenticationService.login(vm.user).success(function  (data){
                 $state.go('dashboard', {});
             }).error( function (data){
                 vm.error = 'Error: Invalid user or password';
             });
-            
         }
 
-        
+
+        vm.register = function() {
+            authenticationService.register(vm.user).success(function  (data){
+                $state.go('dashboard', {});
+            }).error( function (data){
+                vm.error = 'Error: Invalid user or password - ' + data;
+                console.log( 'Error: Invalid user or password - ' + data) ;
+            });
+        }
+
+
+
     }
 })();

@@ -1,8 +1,7 @@
 <section id="dashboard-view" class="mainbar" data-ng-controller="LoginController as vm">
     <section class="matter">
         <div class="container">
-            <span ng-show="vm.isAuthenticated">{{vm.welcome}}</span>
-            <form ng-show="!vm.isAuthenticated" ng-submit="vm.submit()">
+            <form ng-submit="vm.submit()">
                 <input ng-model="vm.user.username" type="text" name="user" placeholder="Username" />
                 <input ng-model="vm.user.password" type="password" name="pass" placeholder="Password" />
                 <input type="submit" value="Login" />

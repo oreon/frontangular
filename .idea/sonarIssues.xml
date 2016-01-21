@@ -18,6 +18,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/client/app/dashboard/dashboard.route.js">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/client/app/layout/ht-top-nav.directive.js">
           <value>
             <set />
@@ -28,7 +33,32 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/client/app/login/login.html">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/client/app/login/login.js">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/client/app/login/register.html">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../../timber/timber-server/app/conf/vowap_soap_endpoints.conf">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../timber/vowap-test-harness/app/app/controllers/VoWifiTestController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../timber/vowap-test-harness/app/public/html/start.html">
           <value>
             <set />
           </value>

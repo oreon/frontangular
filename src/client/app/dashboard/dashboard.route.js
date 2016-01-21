@@ -40,7 +40,22 @@
                         content: '<i class="fa fa-dashboard"></i> LOG IN'
                     }
                 }
+            },
+            {
+                state: 'register',
+                config: {
+                    url: '/register',
+                    templateUrl: 'app/login/register.html',
+                    controller: 'LoginController',
+                    controllerAs: 'vm',
+                    title: 'Register',
+                    settings: {
+                        nav: 1,
+                        content: '<i class="fa fa-dashboard"></i> LOG IN'
+                    }
+                }
             }
+
         ];
     }
 })();
