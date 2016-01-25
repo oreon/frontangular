@@ -30,7 +30,7 @@
         this.readRecord = function(id, service){
             var deferred = $q.defer(),
             cacheKey = id,
-            data = service.cache.get(cacheKey);
+            data = service.getCacheValue(cacheKey);
 
             if (data) {
                 console.log("Found data inside cache", data);
@@ -41,7 +41,7 @@
                 .catch(getFetchFailed);
 
                  function getFetchComplete(response) {
-                     service.cache.put(cacheKey, response);
+                     service.setCacheValue(cacheKey, response);
                      deferred.resolve(response);
                  }
 
@@ -54,9 +54,9 @@
         }
 
         this.getEntityList = function (service) {
-            var deferred = $q.defer(),
-            cacheKey = "all",
-            data = service.cache.get(cacheKey);
+            var deferred = $q.defer();
+            var cacheKey = "all";
+            var data = service.getCacheValue(cacheKey);
 
             if (data) {
                 console.log("Found data inside cache", data);
@@ -67,10 +67,9 @@
                                 .catch(getFetchFailed);
 
                 function getFetchComplete(response) {
-                    console.log("Received data via HTTP");
-                    service.cache.put(cacheKey, response.results);
-                    deferred.resolve(response.results);
-                    //return response.results;
+                   console.log("Received data via HTTP");
+                   service.setCacheValue(cacheKey, response.results);
+                   deferred.resolve(response.results);
                 }
 
                 function getFetchFailed(error) {
@@ -79,11 +78,6 @@
                 }
             }
             return deferred.promise;
-        }
-
-        this.getEntityListFromService = function (service) {
-             return service.query();
-
         }
 
         this.saveEntity = function (entity, service){
@@ -96,7 +90,7 @@
                        .catch(saveFailed);
 
             function saveComplete(response) {
-               service.cache.put(response.id, response);
+               service.setCacheValue(response.id, response);
                return response;
             }
 
