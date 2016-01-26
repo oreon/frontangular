@@ -9,7 +9,7 @@
 
 
 
-	authenticationService.$inject = [ '$http' , /*'$window',*/ '$localStorage'];
+	authenticationService.$inject = [ '$http' , '$window', '$localStorage'];
 
 
 
@@ -17,7 +17,7 @@
 	 * @namespace Authentication
 	 * @returns {Factory}
 	 */
-	function authenticationService( $http, /*$window, */ $localStorage) {
+	function authenticationService( $http, $window, $localStorage) {
 		/**
 		 * @name Authentication
 		 * @desc The Factory to be returned
@@ -56,7 +56,11 @@
                 .success(function (data, status, headers, config) {
                     //$window.sessionStorage.token = data.token;
 					$localStorage.token = data.token
-					$localStorage.username = user.username;
+					$localStorage.user = data.user;
+
+
+                    Authentication.userInfo = parseJwt(data.token)
+                    console.log(Authentication.userInfo);
 
                     var encodedProfile = data.token.split('.')[1];
                     Authentication.profile = JSON.parse(url_base64_decode(encodedProfile));
@@ -82,9 +86,16 @@
            // delete $window.sessionStorage.token;
         };
 
+        function parseJwt (token) {
+            var base64Url = token.split('.')[1];
+            var base64 = base64Url.replace('-', '+').replace('_', '/');
+            return JSON.parse($window.atob(base64));
+        }
+
 
         //this is used to parse the profile
         function url_base64_decode(str) {
+
             var output = str.replace('-', '+').replace('_', '/');
             switch (output.length % 4) {
                 case 0:
@@ -125,7 +136,7 @@
 					user.password = user.password1;
 					Authentication.login(user);
 					//console.log(Authentication.profile);
-				    //vm.welcome = 'Welcome ' + profile.firstName + ' ' + profile.lastName;
+				    toastr.success('Welcome ' + user.username + ', Thanks for registering');
 			   })
 			   .error(function (data, status, headers, config) {
 				return (  data +  ' ' + status);
