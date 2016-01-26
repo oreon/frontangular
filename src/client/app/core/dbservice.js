@@ -8,14 +8,13 @@
 
    function dbService($q, logger){
 
-	    this.getEntity = function (id, service, edit) {
-
+	    this.getEntity = function (id, service, edit, relatedObjects) {
             if(edit){
              return service.getWritable({id:id}).$promise
                 .then(getFetchComplete)
                 .catch(getFetchFailed);
             }else{
-                 return this.readRecord(id, service);
+                 return this.readRecord(id, service, relatedObjects);
             }
 
             function getFetchComplete(response) {
@@ -27,21 +26,30 @@
             }
         }
 
-        this.readRecord = function(id, service){
-            var deferred = $q.defer(),
-            cacheKey = id,
-            data = service.getCacheValue(cacheKey);
+        this.readRecord = function(id, service, relatedObjects){
+            var deferred = $q.defer();
+            var cacheKey = id;
+            var cache = false;
+
+            try {
+                var data = service.getCacheValue(cacheKey);
+                cache = true;
+            }catch(err){
+                console.log(err + " No cache forund for " + service.constructor.name)
+            }
+
 
             if (data) {
                 console.log("Found data inside cache", data);
                 deferred.resolve(data);
             } else {
-                service.getComplete({id:id}).$promise
+                service.getComplete({id:id, related:relatedObjects}).$promise
                 .then(getFetchComplete)
                 .catch(getFetchFailed);
 
                  function getFetchComplete(response) {
-                     service.setCacheValue(cacheKey, response);
+                     if(cache)
+                        service.setCacheValue(cacheKey, response);
                      deferred.resolve(response);
                  }
 

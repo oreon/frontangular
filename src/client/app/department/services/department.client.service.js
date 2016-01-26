@@ -21,7 +21,7 @@ var departmentService = angular.module('app.core').factory('departmentService', 
         },
         'getComplete':{
             method:'GET',
-            url: baseUrl + '/departmentsComplete/:id'
+            url: baseUrl + '/departments/:id/:related'
         },
         'getWritable': {
             method:'GET',
@@ -37,7 +37,7 @@ var departmentService = angular.module('app.core').factory('departmentService', 
             return this.$create();
         }
     }
-
+/*
     res.cache =  CacheFactory('departmentCache', {maxAge: 5 * 60 * 1000  , storageMode: 'localStorage' } ) // 1 hour,
 
     res.getCacheValue = function(key){
@@ -60,7 +60,7 @@ var departmentService = angular.module('app.core').factory('departmentService', 
             return res.cache.put(key, val);
     }
 
-
+*/
     return res;
 });
 

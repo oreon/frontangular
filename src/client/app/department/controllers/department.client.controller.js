@@ -53,6 +53,14 @@
                 vm.tableParams.settings({dataset: vm.departments});
             });
 
+
+
+        }
+
+        vm.getEmployees = function(){
+            Api.getDepartmentComplete($stateParams.id, 'getEmployees').then(function(data) {
+                vm.employees = data;
+            });
         }
 
         vm.toEditDepartment = function(){
@@ -66,6 +74,9 @@
             Api.getDepartment($stateParams.id).then(function(data) {
                   vm.department = data
             });
+
+
+             vm.getEmployees();
         }
 
         function getDepartments() {

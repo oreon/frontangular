@@ -78,14 +78,12 @@
             return dbService.getEntity(id, skillService, true);
         }
 
-
+        function getDepartmentComplete(id, related) {
+            return dbService.getEntity(id, departmentService, related);
+        }
 
         function getDepartment(id) {
             return dbService.getEntity(id, departmentService);
-        }
-
-        function getDepartmentComplete(id) {
-            return getDepartment(id);
         }
 
 
