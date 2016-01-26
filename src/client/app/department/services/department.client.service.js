@@ -8,14 +8,18 @@ var departmentService = angular.module('app.core').factory('departmentService', 
         query: {
             method: 'GET',
             isArray: false,
-           // cache: departmentCache
+        },
+        queryLookups: {
+            method: 'GET',
+            isArray: false,
+            url: baseUrl + '/departmentsLookup'
         },
         'update': { method:'PUT' , url: baseUrl + '/departmentsWritable/:id' },
         'create': { method:'POST' , url: baseUrl + '/departmentsWritable/:id'},
         get: { method:'GET',
-         //cache: departmentCache
+
         },
-         'getComplete':{
+        'getComplete':{
             method:'GET',
             url: baseUrl + '/departmentsComplete/:id'
         },
@@ -37,11 +41,23 @@ var departmentService = angular.module('app.core').factory('departmentService', 
     res.cache =  CacheFactory('departmentCache', {maxAge: 5 * 60 * 1000  , storageMode: 'localStorage' } ) // 1 hour,
 
     res.getCacheValue = function(key){
-        return res.cache.get(key);
+        if(key)
+            retval = res.cache.get(key);
+        else{
+            retval = res.cache.keys().map(function(obj){
+                return res.cache.get(obj);
+            });
+        }
+        return retval;
     }
 
     res.setCacheValue = function(key, val){
-        return res.cache.put(key, val);
+        if(Array.isArray(val)){
+            val.map(function (obj){
+                res.cache.put( obj.id, obj);
+            })
+        }else
+            return res.cache.put(key, val);
     }
 
 

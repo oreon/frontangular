@@ -46,7 +46,7 @@
                  }
 
                 function getFetchFailed(error) {
-                    logger.error(' Failed getting record ' + service.getName() +  id + ' - ' + error.data);
+                    logger.error(' Failed getting record ' + service.name +  id + ' - ' + error.data);
                 }
             }
 
@@ -56,7 +56,13 @@
         this.getEntityList = function (service) {
             var deferred = $q.defer();
             var cacheKey = "all";
-            var data = service.getCacheValue(cacheKey);
+            var cache = false
+            try {
+                var data = service.getCacheValue();
+                cache = true;
+            }catch(err){
+                console.log(err + " No cache forund for " + service.constructor.name)
+            }
 
             if (data) {
                 console.log("Found data inside cache", data);
@@ -68,7 +74,8 @@
 
                 function getFetchComplete(response) {
                    console.log("Received data via HTTP");
-                   service.setCacheValue(cacheKey, response.results);
+                    if(cache)
+                        service.setCacheValue(cacheKey, response.results);
                    deferred.resolve(response.results);
                 }
 

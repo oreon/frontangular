@@ -22,19 +22,19 @@
         ) {
 
         var vm = this;
-      
+
         vm.employees = [];
         vm.tableParams =   new ngTableParams( );//TableSettings.getParams( Employee);
         vm.employee = {};
-        vm.skills  = [];
-        
+  //      vm.skills  = [];
+
           vm.checkModel = {
             left: false,
             middle: true,
             right: false
         };
-       
-     
+
+
         activate();
 
         function activate() {
@@ -42,25 +42,25 @@
                 vm.tableParams.settings({dataset: vm.employees});
                 getEmployees();
             }
-            
+
         }
-        
+
         vm.toEditEmployee = function(){
-            Api.getEmployeeForEdit($stateParams.id).then(function(data) {  
+            Api.getEmployeeForEdit($stateParams.id).then(function(data) {
                  vm.employee = data
-                 
+
                  getDepartments();
                  getSkills();
-                 
+
             });
         }
-        
+
          vm.toViewEmployee = function(){
-            Api.getEmployee($stateParams.id).then(function(data) {  
+            Api.getEmployee($stateParams.id).then(function(data) {
                   vm.employee = data
             });
         }
-        
+
         function getEmployees() {
             return Api.getEmployees()
                 .then(function(data) {
@@ -69,70 +69,76 @@
                     return vm.employees;
                 });
         }
-        
-      
-       vm.departments  = [];
-       
+
+
+      // vm.departments  = [];
+
 		function getDepartments() {
-            return Api.getDepartments()
-                .then(function(data) {
-                    vm.departments = data;
-                });
+
+            if(!vm.departments) {
+                return Api.getDepartments()
+                    .then(function (data) {
+                        vm.departments = data;
+                    });
+
+            }
         }
-        
-        
-        
-       
+
+
 		function getSkills() {
-            return Api.getSkills()
-                .then(function(data) {
-                    vm.skills = data;
-                });
+            if(!vm.skills) {
+
+                return Api.getSkills()
+                    .then(function (data) {
+                        vm.skills = data;
+                    });
+
+            }
         }
-        
-        
-	  
+
+
+
         vm.addEmployeeSkill = function() {
             var item = {};
-            
+
             if(!vm.employee.employeeSkills){
                 vm.employee.employeeSkills =[];
             }
             vm.employee.employeeSkills.push(item);
-            
-           
+
+
         }
 
         vm.removeEmployeeSkill = function(index) {
             vm.employee.employeeSkills.splice(index, 1);
         }
-     
-       
+
+
         vm.create = function() {
             if(!vm.employee.id )
                 vm.employee.dob = "1988-11-01";
         };
-        
+
         vm.remove = function( employee){
-            return Api.removeEmployee( employee).then(function (data){  
+            return Api.removeEmployee( employee).then(function (data){
                 logger.success('Employee Deleted');
                 $location.path('employee');
             });
         }
- 
+
         vm.update = function() {
             var msg = 'updated';
             if(!vm.employee.id ){
                 vm.create();
                 msg = 'created';
             }
-                 
-            return Api.saveEmployee(vm.employee).then(function (data){  
+
+            return Api.saveEmployee(vm.employee).then(function (data){
                 logger.success('Employee ' + msg );
                 $location.path('employee/' + data.id);
             });
         };
-    
+
     }
 
 })();
