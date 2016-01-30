@@ -38,8 +38,6 @@
         vm.department = {};
         vm.departments = [];
 
-
-
          activate();
 
         function activate() {
@@ -52,13 +50,10 @@
                 logger.info('Activated Departments View')
                 vm.tableParams.settings({dataset: vm.departments});
             });
-
-
-
         }
 
         vm.getEmployees = function(){
-            Api.getDepartmentComplete($stateParams.id, 'getEmployees').then(function(data) {
+            Api.getEmployees({department__id:$stateParams.id}).then(function(data) {
                 vm.employees = data;
             });
         }
@@ -75,8 +70,7 @@
                   vm.department = data
             });
 
-
-             vm.getEmployees();
+             //vm.getEmployees();
         }
 
         function getDepartments() {

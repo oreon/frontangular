@@ -38,12 +38,11 @@
                 console.log(err + " No cache forund for " + service.constructor.name)
             }
 
-
             if (data) {
                 console.log("Found data inside cache", data);
                 deferred.resolve(data);
             } else {
-                service.getComplete({id:id, related:relatedObjects}).$promise
+                service.getComplete({id:id}).$promise
                 .then(getFetchComplete)
                 .catch(getFetchFailed);
 
@@ -61,7 +60,7 @@
             return deferred.promise;
         }
 
-        this.getEntityList = function (service) {
+        this.getEntityList = function (service, additionalParams) {
             var deferred = $q.defer();
             var cacheKey = "all";
             var cache = false
@@ -76,7 +75,7 @@
                 console.log("Found data inside cache", data);
                 deferred.resolve(data);
             } else {
-                service.query().$promise
+                service.query(additionalParams).$promise
                                 .then(getFetchComplete)
                                 .catch(getFetchFailed);
 
@@ -105,7 +104,8 @@
                        .catch(saveFailed);
 
             function saveComplete(response) {
-               service.setCacheValue(response.id, response);
+                if(service.setCacheValue)
+                    service.setCacheValue(response.id, response);
                return response;
             }
 
@@ -114,6 +114,20 @@
             };
 
         }
+
+       //TO be used if updating a child element in cache - currently unused
+       this.updateCacheWhenChildChanged = function(newval, parentid, relationName, service){
+            var parent = service.getCacheValue(parentid)
+           if(!parent)
+               return;
+            var arrChildren = parent[relationName];
+            var emp =arrChildren.filter(function(obj) { return obj['id'] == newval.id })
+            if(emp.length == 0 ){
+                arrChildren.push(newval)
+            }else{
+                arrChildren.forEach(function(item, i) { if (item.id == newval.id) arr[i] = newval; });
+            }
+       }
 
         this.removeEntity =  function (entity, service){
             entity = new service(entity);

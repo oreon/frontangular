@@ -23,7 +23,7 @@
 
         var vm = this;
 
-        vm.employees = [];
+        //vm.employees = [];
         vm.tableParams =   new ngTableParams( );//TableSettings.getParams( Employee);
         vm.employee = {};
   //      vm.skills  = [];
@@ -62,12 +62,17 @@
         }
 
         function getEmployees() {
+            if (!vm.employees) {
+
             return Api.getEmployees()
-                .then(function(data) {
+                .then(function (data) {
                     vm.employees = data;
                     logger.info('Activated  Employees View');
                     return vm.employees;
                 });
+
+            }
+
         }
 
 

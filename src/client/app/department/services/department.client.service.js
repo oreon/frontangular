@@ -21,7 +21,7 @@ var departmentService = angular.module('app.core').factory('departmentService', 
         },
         'getComplete':{
             method:'GET',
-            url: baseUrl + '/departments/:id/:related'
+            url: baseUrl + '/departmentsComplete/:id'
         },
         'getWritable': {
             method:'GET',
@@ -37,30 +37,46 @@ var departmentService = angular.module('app.core').factory('departmentService', 
             return this.$create();
         }
     }
-/*
+
     res.cache =  CacheFactory('departmentCache', {maxAge: 5 * 60 * 1000  , storageMode: 'localStorage' } ) // 1 hour,
 
     res.getCacheValue = function(key){
         if(key)
             retval = res.cache.get(key);
         else{
+            /*
             retval = res.cache.keys().map(function(obj){
                 return res.cache.get(obj);
             });
+            if(retval.length == 0 ){
+                return null ;
+            }*/
         }
         return retval;
     }
 
     res.setCacheValue = function(key, val){
         if(Array.isArray(val)){
+            /*
             val.map(function (obj){
                 res.cache.put( obj.id, obj);
-            })
-        }else
+            })*/
+        }else {
+
+            valoriginal = res.cache.get(key, val);
+            if(valoriginal) {
+                for (var attrname in val) {
+                    valoriginal[attrname] = val[attrname];
+                }
+                val = valoriginal;
+            }
+
             return res.cache.put(key, val);
+
+        }
     }
 
-*/
+
     return res;
 });
 

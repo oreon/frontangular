@@ -41,12 +41,14 @@
         }
 
 
-        function getEmployees() {
-            return dbService.getEntityList(employeeService);
+        function getEmployees(additionalParams) {
+            return dbService.getEntityList(employeeService, additionalParams);
         }
 
         function saveEmployee(employee){
-            return dbService.saveEntity(employee, employeeService);
+            var retval =  dbService.saveEntity(employee, employeeService);
+   //         dbService.updateCacheWhenChildChanged(retval, retval.department, "employees", departmentService);
+            return retval;
         }
 
         function  removeEmployee(employee){
