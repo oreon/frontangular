@@ -41,6 +41,7 @@ var departmentService = angular.module('app.core').factory('departmentService', 
     res.cache =  CacheFactory('departmentCache', {maxAge: 5 * 60 * 1000  , storageMode: 'localStorage' } ) // 1 hour,
 
     res.getCacheValue = function(key){
+        var retval ;
         if(key)
             retval = res.cache.get(key);
         else{
