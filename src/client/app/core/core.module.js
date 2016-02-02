@@ -14,11 +14,12 @@
             'ui.bootstrap',
             'ngTable',
             'ngMessages',
-            'formly',
-            /*'ngTasty',*/
-            'formlyBootstrap',
+            /*'formly',
+            'ngTasty',
+            'formlyBootstrap',*/
             'angular-cache',
             'ngStorage',
+            'ngCachedResource'
             'smart-table'
         ]);
 })();

@@ -10,7 +10,7 @@
             request: function (config) {
                 config.headers = config.headers || {};
                 if ($localStorage.token) {
-                    console.log("sending token " + $localStorage.token);
+                   // console.log("sending token " + $localStorage.token);
                     config.headers.Authorization = 'Bearer ' + $localStorage.token;
                 }else{
                    // if(typeof $injector != "undefined")
