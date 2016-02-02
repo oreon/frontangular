@@ -38,6 +38,7 @@
     "angular-messages": "~1.4.8",
     "ng-tasty": "~0.5.8",
     "ngstorage": "~0.3.10",
-    "angular-cookies": "~1.4.9"
+    "angular-cookies": "~1.4.9",
+    "angular-smart-table": "~2.1.7"
   }
 }
