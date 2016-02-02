@@ -4,32 +4,27 @@
     </a>
  </div>
 
-<table ng-table="tableParams" show-filter="true" class="table table-condensed table-striped">
-          <tr ng-repeat="employee in employees">
-               <td data-title="'Gender'" sortable="'gender'" filter="{ 'gender': 'text' }">{{employee.gender}}</td>  
-              <td data-title="'Dob'" sortable="'dob'" filter="{ 'dob': 'text' }">{{employee.dob}}</td>  
-              <td data-title="'Address'" sortable="'address'" filter="{ 'address': 'text' }"> 
-                <a class="btn btn-default" title="View" href="/address/{{employee.address.id}}">{{employee.address.displayName}}</a> 
-              </td>  
-              <td data-title="'Department'" sortable="'department'" filter="{ 'department': 'text' }"> 
-                <a class="btn btn-default" title="View" href="/department/{{employee.department.id}}">{{employee.department.displayName}}</a> 
-              </td>  
-              <td data-title="'First Name'" sortable="'firstName'" filter="{ 'firstName': 'text' }">{{employee.firstName}}</td>  
-              <td data-title="'Last Name'" sortable="'lastName'" filter="{ 'lastName': 'text' }">{{employee.lastName}}</td>  
-              
-        
-              <td>
-                 <div class="table-actions">
-                      <a class="btn btn-default" title="View" href="/employee/{{employee.id}}">
-                        <span class="glyphicon glyphicon-eye-open"></span>
-                      </a>
-                      <a class="btn btn-default" title="Edit" href="/employee/{{employee.id}}/edit">
-                        <span class="glyphicon glyphicon-edit"></span>
-                      </a>
-                      <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove(employee)" item="employee">
-                        <span class="glyphicon glyphicon-remove-circle"></span>
-                      </a>
-                  </div>
-              </td>
-          </tr>
-      </table>
+<table st-table="employees" class="table table-striped">
+	<thead>
+	<tr>
+		<th st-sort="firstName">first name</th>
+		<th st-sort="lastName">last name</th>
+		<th st-sort="dob">birth date</th>
+		<th st-sort="department.displayName"  >Department</th>
+
+	</tr>
+       
+	</thead>
+	<tbody>
+	<tr ng-repeat="row in employees">
+		<td>{{row.firstName | uppercase}}</td>
+		<td>{{row.lastName}}</td>
+		<td>{{row.dob | date}}</td>
+		
+		<td><a class="btn btn-default" title="View" href="/department/{{row.department.id}}">{{row.department.displayName}}</a> </td>
+	</tr>
+	</tbody>
+</table>
+
+
+
